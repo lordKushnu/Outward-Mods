@@ -17,12 +17,23 @@ namespace RecipeBrowser.Services
             Inventory,
             Equipment,
             Merchant
-        }
+        };
+        public static readonly HashSet<AreaManager.AreaEnum> stashAreas = new HashSet<AreaManager.AreaEnum>()
+        {
+            AreaManager.AreaEnum.CierzoVillage,
+            AreaManager.AreaEnum.Monsoon,
+            AreaManager.AreaEnum.Berg,
+            AreaManager.AreaEnum.Levant,
+            AreaManager.AreaEnum.Harmattan,
+            AreaManager.AreaEnum.NewSirocco,
+        };
         private Character _character;
         private CharacterUI _characterUI => _character.CharacterUI;
         private const string _inventoryDisplayPath = "Canvas/GameplayPanels/Menus/CharacterMenus/MainPanel/Content/MiddlePanel/Inventory/Content/SectionContent";
         private ContainerDisplay storedStashDisplay;
         private int timesCalled = 0;
+
+        public bool GetAreaContainsStash() => TryGetCurrentAreaEnum(out var area) && stashAreas.Contains(area);
 
         public int Start()
         {
@@ -50,7 +61,11 @@ namespace RecipeBrowser.Services
             if (inventoryPath.EndsWith(_inventoryDisplayPath))
             {
                 //It's an Inventory
-                if(storedStashDisplay == null)
+                if (!GetAreaContainsStash()) //Area doesn't contain stash
+                {
+                    deleteStash();
+                }
+                else if(storedStashDisplay == null)
                 {
                     RecipeBrowser.Log.LogInfo($"creating new stash display");
                     RectTransform parentTransform = inventoryContentDisplay.m_overrideContentHolder;
@@ -95,6 +110,7 @@ namespace RecipeBrowser.Services
 
         private void ShowStashPanel(CharacterUI instance)
         {
+            RecipeBrowser.Log.LogInfo($"Stash in Area: {GetAreaContainsStash()}");
             var charHost = CharacterManager.Instance.GetWorldHostCharacter();
             var localCharacter = CharacterManager.Instance.GetFirstLocalCharacter();
             var localStash = localCharacter.Stash;
@@ -106,8 +122,25 @@ namespace RecipeBrowser.Services
         }
         public void deleteStash()
         {
-            storedStashDisplay.gameObject.SetActive(false);
-            GameObject.Destroy(storedStashDisplay.gameObject);
+            if(storedStashDisplay != null)
+            {
+                storedStashDisplay.gameObject.SetActive(false);
+                GameObject.Destroy(storedStashDisplay.gameObject);
+            }
+            
+        }
+
+        public static bool TryGetCurrentAreaEnum(out AreaManager.AreaEnum area)
+        {
+            area = default;
+            var sceneName = AreaManager.Instance?.CurrentArea?.SceneName;
+            if (string.IsNullOrEmpty(sceneName))
+                return false;
+
+            area = (AreaManager.AreaEnum)AreaManager.Instance.GetAreaIndexFromSceneName(sceneName);
+            return true;
         }
     }
+
+
 }
