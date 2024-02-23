@@ -1,6 +1,0 @@
-C:\Users\fartl\Desktop\Modding tools\Outward\OutwardModTemplate-main\Release\RecipeBrowser.dll.config
-C:\Users\fartl\Desktop\Modding tools\Outward\OutwardModTemplate-main\Release\RecipeBrowser.dll
-C:\Users\fartl\Desktop\Modding tools\Outward\OutwardModTemplate-main\src\obj\Debug\RecipeBrowser.csproj.AssemblyReference.cache
-C:\Users\fartl\Desktop\Modding tools\Outward\OutwardModTemplate-main\src\obj\Debug\RecipeBrowser.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\fartl\Desktop\Modding tools\Outward\OutwardModTemplate-main\src\obj\Debug\RecipeBrowser.csproj.CoreCompileInputs.cache
-C:\Users\fartl\Desktop\Modding tools\Outward\OutwardModTemplate-main\src\obj\Debug\RecipeBrowser.dll
