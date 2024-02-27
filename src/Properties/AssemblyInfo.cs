@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion(RecipeBrowser.RecipeBrowser.VERSION)]
-[assembly: AssemblyFileVersion(RecipeBrowser.RecipeBrowser.VERSION)]
+[assembly: AssemblyVersion(HostInventoryStash.HostInventoryStash.VERSION)]
+[assembly: AssemblyFileVersion(HostInventoryStash.HostInventoryStash.VERSION)]

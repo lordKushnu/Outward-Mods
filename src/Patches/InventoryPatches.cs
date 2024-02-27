@@ -1,6 +1,6 @@
 ﻿using BepInEx.Logging;
 using HarmonyLib;
-using RecipeBrowser.Services;
+using HostInventoryStash.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,16 +11,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using static MapMagic.ObjectPool;
 
-namespace RecipeBrowser.Patches
+namespace HostInventoryStash.Patches
 {
     [HarmonyPatch(typeof(CharacterUI))]
-    internal static class InventoryPatches
+    internal static class CharacterUiPatches
     {
         
         public delegate void ShowMenuDelegate(CharacterUI characterUI, CharacterUI.MenuScreens menu, Item item);
         public static event ShowMenuDelegate BeforeShowMenu;
-        public static InventoryStashService inventoryStashService = new InventoryStashService();
         //Run this prefix before showing the inventory menu
+        
         [HarmonyPatch(nameof(CharacterUI.ShowMenu))]
         [HarmonyPatch(new Type[] { typeof(CharacterUI.MenuScreens), typeof(Item) })]
         [HarmonyPrefix]
@@ -32,11 +32,11 @@ namespace RecipeBrowser.Patches
                     return;
                 if (_menu != CharacterUI.MenuScreens.Inventory)
                     return;
-                inventoryStashService.createStashMenu(__instance, _menu, _item);
+                HostInventoryStash.inventoryStashService.createStashMenu(__instance, _menu, _item);
             } catch (Exception ex) {
-                RecipeBrowser.Log.LogInfo("Failed to Run Open Inventory Is Menu Focused");
+                HostInventoryStash.Log.LogInfo("Failed to Run Open Inventory Is Menu Focused");
             }
-            
         }
+        
     }
 }

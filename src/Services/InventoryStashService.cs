@@ -3,21 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static RecipeBrowser.Patches.InventoryPatches;
 using UnityEngine;
-using RecipeBrowser.Patches;
+using HostInventoryStash.Patches;
 
-namespace RecipeBrowser.Services
+namespace HostInventoryStash.Services
 {
     internal class InventoryStashService
     {
-        public enum StashDisplayTypes
-        {
-            Disabled,
-            Inventory,
-            Equipment,
-            Merchant
-        };
         public static readonly HashSet<AreaManager.AreaEnum> stashAreas = new HashSet<AreaManager.AreaEnum>()
         {
             AreaManager.AreaEnum.CierzoVillage,
@@ -43,8 +35,7 @@ namespace RecipeBrowser.Services
 
         public void createStashMenu(CharacterUI characterUI, CharacterUI.MenuScreens menu, Item item)
         {
-            if (menu != CharacterUI.MenuScreens.Inventory && menu != CharacterUI.MenuScreens.Equipment
-                && menu != CharacterUI.MenuScreens.Shop)
+            if (menu != CharacterUI.MenuScreens.Inventory)
                 return;
 
             ToggleStashes(characterUI);
@@ -61,13 +52,14 @@ namespace RecipeBrowser.Services
             if (inventoryPath.EndsWith(_inventoryDisplayPath))
             {
                 //It's an Inventory
-                if (!GetAreaContainsStash()) //Area doesn't contain stash
+                if (!GetAreaContainsStash() && !HostInventoryStash.ShowStashOutsideOfTown.Value || !HostInventoryStash.ShowStash.Value) //Area doesn't contain stash
                 {
                     deleteStash();
+                    return;
                 }
                 else if(storedStashDisplay == null)
                 {
-                    RecipeBrowser.Log.LogInfo($"creating new stash display");
+                    HostInventoryStash.Log.LogInfo($"creating new stash display");
                     RectTransform parentTransform = inventoryContentDisplay.m_overrideContentHolder;
                     if (parentTransform == null)
                         parentTransform = inventoryContentDisplay.m_inventoriesScrollRect?.content;
@@ -97,20 +89,19 @@ namespace RecipeBrowser.Services
                 }
                 else
                 {
-                    RecipeBrowser.Log.LogInfo($"Stash Display already exists");
+                    HostInventoryStash.Log.LogInfo($"Stash Display already exists");
                     ShowStashPanel(_instance);
                 }
             }
-
             else
             {
-                RecipeBrowser.Log.LogInfo($"not an Inventory?");
+                HostInventoryStash.Log.LogInfo($"not an Inventory?");
             }
         }
 
         private void ShowStashPanel(CharacterUI instance)
         {
-            RecipeBrowser.Log.LogInfo($"Stash in Area: {GetAreaContainsStash()}");
+            HostInventoryStash.Log.LogInfo($"Stash in Area: {GetAreaContainsStash()}");
             var charHost = CharacterManager.Instance.GetWorldHostCharacter();
             var localCharacter = CharacterManager.Instance.GetFirstLocalCharacter();
             var localStash = localCharacter.Stash;
@@ -122,7 +113,7 @@ namespace RecipeBrowser.Services
         }
         public void deleteStash()
         {
-            if(storedStashDisplay != null)
+            if (storedStashDisplay)
             {
                 storedStashDisplay.gameObject.SetActive(false);
                 GameObject.Destroy(storedStashDisplay.gameObject);
@@ -140,6 +131,20 @@ namespace RecipeBrowser.Services
             area = (AreaManager.AreaEnum)AreaManager.Instance.GetAreaIndexFromSceneName(sceneName);
             return true;
         }
+
+        public void ConfigureStashDisplay(InventoryContentDisplay inventoryContentDisplay)
+        {
+            if (storedStashDisplay == null) {
+                return;
+            }
+            ItemFilter filter = inventoryContentDisplay.m_filter;
+            var exceptionFilter = inventoryContentDisplay.m_exceptionFilter;
+            storedStashDisplay.SetFilter(filter);
+            storedStashDisplay.SetExceptionFilter(exceptionFilter);
+            storedStashDisplay.Refresh();
+            HostInventoryStash.Log.LogInfo($"Configure filters for stash display {storedStashDisplay?.name} - '{storedStashDisplay.transform.GetGameObjectPath()}'.");
+        }
+
     }
 
 

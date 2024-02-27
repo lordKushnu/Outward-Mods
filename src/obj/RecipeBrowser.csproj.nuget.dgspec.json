@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\fartl\\Desktop\\Modding tools\\Outward\\OutwardModTemplate-main\\src\\RecipeBrowser.csproj": {}
+    "C:\\Users\\fartl\\Desktop\\Modding tools\\Outward\\theGrunglerMod\\src\\RecipeBrowser.csproj": {}
   },
   "projects": {
-    "C:\\Users\\fartl\\Desktop\\Modding tools\\Outward\\OutwardModTemplate-main\\src\\RecipeBrowser.csproj": {
+    "C:\\Users\\fartl\\Desktop\\Modding tools\\Outward\\theGrunglerMod\\src\\RecipeBrowser.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\fartl\\Desktop\\Modding tools\\Outward\\OutwardModTemplate-main\\src\\RecipeBrowser.csproj",
+        "projectUniqueName": "C:\\Users\\fartl\\Desktop\\Modding tools\\Outward\\theGrunglerMod\\src\\RecipeBrowser.csproj",
         "projectName": "RecipeBrowser",
-        "projectPath": "C:\\Users\\fartl\\Desktop\\Modding tools\\Outward\\OutwardModTemplate-main\\src\\RecipeBrowser.csproj",
+        "projectPath": "C:\\Users\\fartl\\Desktop\\Modding tools\\Outward\\theGrunglerMod\\src\\RecipeBrowser.csproj",
         "packagesPath": "C:\\Users\\fartl\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\fartl\\Desktop\\Modding tools\\Outward\\OutwardModTemplate-main\\src\\obj\\",
+        "outputPath": "C:\\Users\\fartl\\Desktop\\Modding tools\\Outward\\theGrunglerMod\\src\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\fartl\\Desktop\\Modding tools\\Outward\\OutwardModTemplate-main\\src\\NuGet.Config",
+          "C:\\Users\\fartl\\Desktop\\Modding tools\\Outward\\theGrunglerMod\\src\\NuGet.Config",
           "C:\\Users\\fartl\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
