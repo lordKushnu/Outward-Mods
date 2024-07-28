@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CFrppguiRpCFnIve2ecLb4jCsw8W5FMp9A2dozp3mAaYd/lPCvXJZM5YsMGt+uKf+YyZDzXqsqG4wHUaYm5rmQ==",
+  "dgSpecHash": "B5Xa7YymsKMkTzGYmzGLF5sOkZj4GGCXWuPs0sJ5cHrg8DeCRuvhS12cbCLAWR+6Ah7DYZ5Pz21Amra3SioSqA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\fartl\\Desktop\\Modding tools\\Outward\\Outward-see-host-stash-in-inventory\\src\\HostInventoryStash.csproj",
+  "projectFilePath": "C:\\Users\\fartl\\Desktop\\Modding tools\\Outward\\replaceItemDescriptions\\src\\ReplaceItemDescriptions.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\fartl\\.nuget\\packages\\bepinex.baselib\\5.4.16\\bepinex.baselib.5.4.16.nupkg.sha512",
     "C:\\Users\\fartl\\.nuget\\packages\\harmonyx\\2.5.7\\harmonyx.2.5.7.nupkg.sha512",

@@ -1,0 +1,6 @@
+C:\Users\fartl\Desktop\Modding tools\Outward\replaceItemDescriptions\src\obj\Debug\ReplaceItemDescriptions.csproj.AssemblyReference.cache
+C:\Users\fartl\Desktop\Modding tools\Outward\replaceItemDescriptions\src\obj\Debug\ReplaceItemDescriptions.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\fartl\Desktop\Modding tools\Outward\replaceItemDescriptions\src\obj\Debug\ReplaceItemDescriptions.csproj.CoreCompileInputs.cache
+C:\Users\fartl\Desktop\Modding tools\Outward\replaceItemDescriptions\Release\ReplaceItemDescriptions.dll.config
+C:\Users\fartl\Desktop\Modding tools\Outward\replaceItemDescriptions\Release\ReplaceItemDescriptions.dll
+C:\Users\fartl\Desktop\Modding tools\Outward\replaceItemDescriptions\src\obj\Debug\ReplaceItemDescriptions.dll

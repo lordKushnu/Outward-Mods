@@ -15,7 +15,7 @@ namespace HostInventoryStash
         // Choose a NAME for your project, generally the same as your Assembly Name.
         public const string NAME = "HostInventoryStash";
         // Increment the VERSION when you release a new version of your mod.
-        public const string VERSION = "1.0.0";
+        public const string VERSION = "1.0.3";
 
         public const string DISPLAY_NAME = "Host Inventory Stash";
 
@@ -51,7 +51,7 @@ namespace HostInventoryStash
 
         private void InitializeConfig()
         {
-            ShowStash = Config.Bind(DISPLAY_NAME, "Show Host inventory stash", false, "Allows host's stash to be shown while in inventory");
+            ShowStash = Config.Bind(DISPLAY_NAME, "Show Host inventory stash", true, "Allows host's stash to be shown while in inventory");
             ShowStashOutsideOfTown = Config.Bind(DISPLAY_NAME, "Show outside of town", false, "Allows Host's stash to be accessable while out of town");
         }
 
