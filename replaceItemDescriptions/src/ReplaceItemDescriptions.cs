@@ -48,6 +48,7 @@ namespace ReplaceItemDescriptions
             [HarmonyPostfix]
             private void Load()
             {
+                Log.LogMessage("Loading ResourcesPrefabManager");
                 ResourcesPrefabManager prefabManager = ResourcesPrefabManager.Instance;
                 if (prefabManager.Loaded != true)
                 {
