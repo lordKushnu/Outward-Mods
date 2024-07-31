@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\fartl\\Desktop\\Modding tools\\Outward\\replaceItemDescriptions\\src\\ReplaceItemDescriptions.csproj": {}
+    "C:\\Users\\fartl\\Desktop\\Modding tools\\Outward\\Outward-see-host-stash-in-inventory\\replaceItemDescriptions\\src\\ReplaceItemDescriptions.csproj": {}
   },
   "projects": {
-    "C:\\Users\\fartl\\Desktop\\Modding tools\\Outward\\replaceItemDescriptions\\src\\ReplaceItemDescriptions.csproj": {
+    "C:\\Users\\fartl\\Desktop\\Modding tools\\Outward\\Outward-see-host-stash-in-inventory\\replaceItemDescriptions\\src\\ReplaceItemDescriptions.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\fartl\\Desktop\\Modding tools\\Outward\\replaceItemDescriptions\\src\\ReplaceItemDescriptions.csproj",
+        "projectUniqueName": "C:\\Users\\fartl\\Desktop\\Modding tools\\Outward\\Outward-see-host-stash-in-inventory\\replaceItemDescriptions\\src\\ReplaceItemDescriptions.csproj",
         "projectName": "ReplaceItemDescriptions",
-        "projectPath": "C:\\Users\\fartl\\Desktop\\Modding tools\\Outward\\replaceItemDescriptions\\src\\ReplaceItemDescriptions.csproj",
+        "projectPath": "C:\\Users\\fartl\\Desktop\\Modding tools\\Outward\\Outward-see-host-stash-in-inventory\\replaceItemDescriptions\\src\\ReplaceItemDescriptions.csproj",
         "packagesPath": "C:\\Users\\fartl\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\fartl\\Desktop\\Modding tools\\Outward\\replaceItemDescriptions\\src\\obj\\",
+        "outputPath": "C:\\Users\\fartl\\Desktop\\Modding tools\\Outward\\Outward-see-host-stash-in-inventory\\replaceItemDescriptions\\src\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\fartl\\Desktop\\Modding tools\\Outward\\replaceItemDescriptions\\src\\NuGet.Config",
+          "C:\\Users\\fartl\\Desktop\\Modding tools\\Outward\\Outward-see-host-stash-in-inventory\\replaceItemDescriptions\\src\\NuGet.Config",
           "C:\\Users\\fartl\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],

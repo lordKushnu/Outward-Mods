@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using static MapMagic.ObjectPool;
 using static PunTeams;
 
 // RENAME 'OutwardModTemplate' TO SOMETHING ELSE
@@ -29,67 +30,69 @@ namespace ReplaceItemDescriptions
         private static Harmony _harmony;
 
         // If you need settings, define them like so:
-        public static ConfigEntry<bool> ShowStash;
-        public static ConfigEntry<bool> ShowStashOutsideOfTown;
-        public static ConfigEntry<bool> ShouldReplaceItemDescriptions;
         // Awake is called when your plugin is created. Use this to set up your mod.
         internal void Awake()
         {
             Log = this.Logger;
             Log.LogMessage($"Starting {NAME} {VERSION}!");
             InitializeConfig();
-            //ReplaceDescriptions();
             // Any config settings you define should be set up like this:
             // Harmony is for patching methods. If you're not patching anything, you can comment-out or delete this line.
             _harmony = new Harmony(GUID);
             _harmony.PatchAll();
             //inventoryStashService = new InventoryStashService();
         }
-
-        private void ReplaceDescriptions()
+        [HarmonyPatch(typeof(ResourcesPrefabManager), nameof(ResourcesPrefabManager.Load))]
+        public class ReplacePrefabDescriptions
         {
-            ResourcesPrefabManager prefabManager = ResourcesPrefabManager.Instance;
-            Log.LogMessage("Replacing Descriptions");
-            if (prefabManager.Loaded != true)
+            [HarmonyPostfix]
+            private void Load()
             {
-                Log.LogMessage("Manager not Initialized");
-                return;
-            }
-            System.Collections.Generic.Dictionary<string, Item> itemPrefabs = ResourcesPrefabManager.ITEM_PREFABS;
-            foreach (var kvp in itemPrefabs.ToArray())
-            {
-                //if (kvp.Value.ItemID != 4100310)
+                ResourcesPrefabManager prefabManager = ResourcesPrefabManager.Instance;
+                if (prefabManager.Loaded != true)
+                {
+                    Log.LogMessage("Manager not Initialized");
+                    return;
+                }
+                System.Collections.Generic.Dictionary<string, Item> itemPrefabs = ResourcesPrefabManager.ITEM_PREFABS;
+                foreach (var kvp in itemPrefabs.ToArray())
+                {
+                    //if (kvp.Value.ItemID != 4100310)
                     //Log.LogMessage("Not the right Item");
                     //continue;
-                Item item = prefabManager.GetItemPrefab(kvp.Value.ItemID);
-                if (!item.IsUsable)
-                    continue;
-                Transform itemTransform = item.transform;
-                if (itemTransform == null)
-                {
-                    continue;
-                }
-                var effectTransform = itemTransform.Find("Effects");
-                if(effectTransform == null)
-                {
-                    continue;
-                }
-                Effect[] addedStatusEffects = effectTransform.GetComponents<Effect>();
-                if (addedStatusEffects.Length == 0)
-                    continue;
-                StringBuilder sb = new StringBuilder();
-                Log.LogMessage(item.name);
-                foreach (var effect in addedStatusEffects)
-                {
-                    appendStatusText(sb, effect);
+                    Item item = prefabManager.GetItemPrefab(kvp.Value.ItemID);
+                    if (!item.IsUsable)
+                        continue;
+                    Transform itemTransform = item.transform;
+                    if (itemTransform == null)
+                    {
+                        continue;
+                    }
+                    var effectTransform = itemTransform.Find("Effects");
+                    if (effectTransform == null)
+                    {
+                        continue;
+                    }
+                    Effect[] addedStatusEffects = effectTransform.GetComponents<Effect>();
+                    if (addedStatusEffects.Length == 0)
+                        continue;
+                    StringBuilder sb = new StringBuilder();
+                    foreach (var effect in addedStatusEffects)
+                    {
+                        appendStatusText(sb, effect);
 
-                }
-                if(sb.Length > 0)
-                {
-                    Log.LogMessage(sb.ToString());
-                }
-            }
+                    }
+                    if (sb.Length == 0)
+                    {
+                        continue;
+                    }
+                    sb.Append("\n");
+                    sb.Append(item.Description);
 
+                    AccessTools.Field(typeof(Item), "m_localizedDescription").SetValue(item, sb.ToString());
+                }
+    
+        }
         }
 
         static void appendStatusText(StringBuilder sb, Effect effect)
@@ -117,7 +120,7 @@ namespace ReplaceItemDescriptions
             else if (effect.GetType() == typeof(AffectCorruption))
             {
                 var effectName = ((AffectCorruption)effect).AffectQuantity;
-                sb.AppendLine("Corruption " + (effectName/10).ToString("+#;-#;0") + "%");
+                sb.AppendLine("Corruption " + (effectName / 10).ToString("+#;-#;0") + "%");
             }
             else if (effect.GetType() == typeof(AffectHealth))
             {
@@ -156,10 +159,10 @@ namespace ReplaceItemDescriptions
         static void appendRemoveStatusEffect(RemoveStatusEffect effect, StringBuilder sb)
         {
             var cleanseType = ((RemoveStatusEffect)effect).CleanseType;
-            if(cleanseType == RemoveStatusEffect.RemoveTypes.StatusType)
+            if (cleanseType == RemoveStatusEffect.RemoveTypes.StatusType)
             {
                 sb.AppendLine("Remove " + effect.StatusType.Tag.TagName);
-            } 
+            }
             else if (cleanseType == RemoveStatusEffect.RemoveTypes.StatusFamily)
             {
                 sb.AppendLine("Remove " + effect.StatusFamily.Internal_Get().Name);
@@ -213,7 +216,6 @@ namespace ReplaceItemDescriptions
                 sb.Append("\n");
                 sb.Append(__instance.Description);
 
-                object localizedDesc = AccessTools.Field(typeof(Item), "m_localizedDescription").GetValue(__instance);
                 AccessTools.Field(typeof(Item), "m_localizedDescription").SetValue(__instance, sb.ToString());
 
             }
@@ -229,9 +231,6 @@ namespace ReplaceItemDescriptions
 
         private void InitializeConfig()
         {
-            ShowStash = Config.Bind(DISPLAY_NAME, "Show Host inventory stash", false, "Allows host's stash to be shown while in inventory");
-            ShowStashOutsideOfTown = Config.Bind(DISPLAY_NAME, "Show outside of town", false, "Allows Host's stash to be accessable while out of town");
-            ShouldReplaceItemDescriptions = Config.Bind(DISPLAY_NAME, "Just a test", false, "Allows my balls in your Jaws");
         }
 
         // Update is called once per frame. Use this only if needed.

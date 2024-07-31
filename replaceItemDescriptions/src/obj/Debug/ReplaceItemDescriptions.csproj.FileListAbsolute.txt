@@ -4,3 +4,9 @@ C:\Users\fartl\Desktop\Modding tools\Outward\replaceItemDescriptions\src\obj\Deb
 C:\Users\fartl\Desktop\Modding tools\Outward\replaceItemDescriptions\Release\ReplaceItemDescriptions.dll.config
 C:\Users\fartl\Desktop\Modding tools\Outward\replaceItemDescriptions\Release\ReplaceItemDescriptions.dll
 C:\Users\fartl\Desktop\Modding tools\Outward\replaceItemDescriptions\src\obj\Debug\ReplaceItemDescriptions.dll
+C:\Users\fartl\Desktop\Modding tools\Outward\Outward-see-host-stash-in-inventory\replaceItemDescriptions\Release\ReplaceItemDescriptions.dll.config
+C:\Users\fartl\Desktop\Modding tools\Outward\Outward-see-host-stash-in-inventory\replaceItemDescriptions\Release\ReplaceItemDescriptions.dll
+C:\Users\fartl\Desktop\Modding tools\Outward\Outward-see-host-stash-in-inventory\replaceItemDescriptions\src\obj\Debug\ReplaceItemDescriptions.csproj.AssemblyReference.cache
+C:\Users\fartl\Desktop\Modding tools\Outward\Outward-see-host-stash-in-inventory\replaceItemDescriptions\src\obj\Debug\ReplaceItemDescriptions.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\fartl\Desktop\Modding tools\Outward\Outward-see-host-stash-in-inventory\replaceItemDescriptions\src\obj\Debug\ReplaceItemDescriptions.csproj.CoreCompileInputs.cache
+C:\Users\fartl\Desktop\Modding tools\Outward\Outward-see-host-stash-in-inventory\replaceItemDescriptions\src\obj\Debug\ReplaceItemDescriptions.dll
