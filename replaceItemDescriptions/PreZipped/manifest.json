@@ -1,7 +1,0 @@
-{
-    "name": "ReplaceConsumableItemDescriptions",
-    "version_number": "1.0.2",
-    "website_url": "https://github.com/lordKushnu/Outward-Mods",
-    "description": "Adds the consumable effects as part of item description",
-    "dependencies": ["BepInEx-BepInExPack_Outward-5.4.19"]
-}
