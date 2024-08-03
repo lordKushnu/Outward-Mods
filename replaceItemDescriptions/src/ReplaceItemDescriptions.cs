@@ -103,6 +103,11 @@ namespace ReplaceItemDescriptions
                 var effectName = ((AddStatusEffect)effect).Status;
                 sb.AppendLine(effectName.IdentifierName);
             }
+            if (effect.GetType() == typeof(AddBoonEffect))
+            {
+                var effectName = ((AddBoonEffect)effect).Status;
+                sb.AppendLine(effectName.StatusName);
+            }
             else if (effect.GetType() == typeof(AffectBurntHealth))
             {
                 var effectName = ((AffectBurntHealth)effect).AffectQuantity;
@@ -145,6 +150,7 @@ namespace ReplaceItemDescriptions
                 appendRemoveStatusEffect((RemoveStatusEffect)effect, sb);
 
             }
+
             else if (effect.GetType() == typeof(AffectFood))
             {
                 var effectName = ((AffectFood)effect).m_affectQuantity / 10;

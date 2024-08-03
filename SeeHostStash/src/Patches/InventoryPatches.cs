@@ -26,12 +26,14 @@ namespace HostInventoryStash.Patches
         [HarmonyPrefix]
         private static void ShowMenuPrefix(CharacterUI __instance, CharacterUI.MenuScreens _menu, Item _item)
         {
+            HostInventoryStash.Log.LogInfo("ShowMenuHarmonyPatch");
             try
             {
                 if (__instance.TargetCharacter == null || __instance.TargetCharacter.OwnerPlayerSys == null || !__instance.TargetCharacter.IsLocalPlayer)
                     return;
                 if (_menu != CharacterUI.MenuScreens.Inventory)
                     return;
+                HostInventoryStash.Log.LogInfo("Create Stash Menu Patch");
                 HostInventoryStash.inventoryStashService.createStashMenu(__instance, _menu, _item);
             } catch (Exception ex) {
                 HostInventoryStash.Log.LogInfo("Failed to Run Open Inventory Is Menu Focused");

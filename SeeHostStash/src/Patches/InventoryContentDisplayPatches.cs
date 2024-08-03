@@ -25,5 +25,13 @@ namespace HostInventoryStash.Patches
                 HostInventoryStash.Log.LogInfo("Failed To Refresh Container Display");
             }
         }
+
+        [HarmonyPatch(nameof(InventoryContentDisplay.FocusMostRelevantItem))]
+        [HarmonyPatch(new Type[] { typeof(ItemListDisplay) })]
+        [HarmonyPostfix]
+        private static void FocusMostRelevantItemPostfix(InventoryContentDisplay __instance, ItemListDisplay _excludedList, bool __result)
+        {
+            HostInventoryStash.Log.LogInfo("FocusingMostRelevantItem");
+        }
     }
 }

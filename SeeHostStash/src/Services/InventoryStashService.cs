@@ -48,10 +48,11 @@ namespace HostInventoryStash.Services
 
         private void AddStashDisplay(CharacterUI _instance, InventoryContentDisplay inventoryContentDisplay)
         {
+            HostInventoryStash.Log.LogInfo("AddStashDisplayMethod");
             var inventoryPath = inventoryContentDisplay.transform.GetGameObjectPath();
             if (inventoryPath.EndsWith(_inventoryDisplayPath))
             {
-                //It's an Inventory
+                //if Area doesn't contain stash and settings say you shouldn't show stash
                 if (!GetAreaContainsStash() && !HostInventoryStash.ShowStashOutsideOfTown.Value || !HostInventoryStash.ShowStash.Value) //Area doesn't contain stash
                 {
                     deleteStash();
@@ -68,29 +69,14 @@ namespace HostInventoryStash.Services
                     stashDisplay.transform.SetParent(parentTransform);
                     stashDisplay.transform.ResetLocal();
                     stashDisplay.name = "HostStashDisplay";
-                    stashDisplay.SetName("Host Display");
+                    stashDisplay.m_lblWeight = null;
 
-                    var header = stashDisplay.transform.Find("Header");
-                    if(header != null)
-                    {
-                        var lblWeight = (RectTransform)header.transform.Find("lblWeight");
-                        if(lblWeight != null)
-                        {
-                            UnityEngine.Object.Destroy(lblWeight.gameObject);
-                        }
-                        var iconWeight = header.transform.Find("iconWeight");
-                        if(iconWeight != null)
-                        {
-                            UnityEngine.Object.Destroy(iconWeight.gameObject);
-                        }
-                    }
                     storedStashDisplay = stashDisplay;
-                    ShowStashPanel(_instance);
+                    ShowStashPanel();
                 }
                 else
                 {
-                    HostInventoryStash.Log.LogInfo($"Stash Display already exists");
-                    ShowStashPanel(_instance);
+                    ShowStashPanel();
                 }
             }
             else
@@ -99,16 +85,10 @@ namespace HostInventoryStash.Services
             }
         }
 
-        private void ShowStashPanel(CharacterUI instance)
+        private void ShowStashPanel()
         {
-            HostInventoryStash.Log.LogInfo($"Stash in Area: {GetAreaContainsStash()}");
             var charHost = CharacterManager.Instance.GetWorldHostCharacter();
-            var localCharacter = CharacterManager.Instance.GetFirstLocalCharacter();
-            var localStash = localCharacter.Stash;
             ItemContainer hostStash = charHost.Stash;
-            var localStashPanel = localCharacter.CharacterUI.StashPanel;
-            localStashPanel.SetStash(hostStash);
-            hostStash.ShowContent(localCharacter);
             storedStashDisplay.SetReferencedContainer(hostStash);
         }
         public void deleteStash()
